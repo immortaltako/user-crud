@@ -50,14 +50,19 @@ class PersonsController extends Controller
         ]);
 
         // Create person
-        $person = new Person;
-        $person->first_name = $request->input('first_name');
-        $person->last_name = $request->input('last_name');
-        $person->email = $request->input('email');
-        $person->dob = $request->input('dob');
-        $person->eye_color = $request->input('eye_color');
-        $person->activity = $request->input('activity');
-        $person->save();
+        try {
+            $person = new Person;
+            $person->first_name = $request->input('first_name');
+            $person->last_name = $request->input('last_name');
+            $person->email = $request->input('email');
+            $person->dob = $request->input('dob');
+            $person->eye_color = $request->input('eye_color');
+            $person->activity = $request->input('activity');
+            $person->save();
+        } catch(\Exception $e){
+            $error = 'Error: ' . $e->getMessage();   // insert query
+            return redirect('/persons/create')->with('error', $error);
+        }
 
         return redirect('/persons')->with('success', 'Person Created');
     }

@@ -24,6 +24,6 @@
             @endforeach
         </div>
     @else
-        <p>No people found.</p>
+        <p class="text-center py-4">No people found. Click Add Person to get started.</p>
     @endif
 @endsection
