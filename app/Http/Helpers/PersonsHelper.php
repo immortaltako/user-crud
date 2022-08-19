@@ -12,7 +12,7 @@ class PersonsHelper
         return $diff->format('%y');
     }
 
-    public static function getSign($dob) {
+    public static function getSign(string $dob):string {
         $zodiac = '';
 
         list ($year, $month, $day) = explode ('-', $dob);
@@ -31,5 +31,45 @@ class PersonsHelper
         elseif ( ( $month == 2 && $day > 18 ) || ( $month == 3 && $day < 21 ) ) { $zodiac = "Pisces"; }
 
         return $zodiac;
+    }
+
+    public static function getActivities() {
+        return [
+            'baseball' => ['title' => 'Baseball', 'icon' => 'baseball'],
+            'basketball' => ['title' => 'Basketball', 'icon' => 'basketball-ball'],
+            'bowling' => ['title' => 'Bowling', 'icon' => 'bowling-ball'],
+            'exercise' => ['title' => 'Exercise', 'icon' => 'dumbbell'],
+            'football' => ['title' => 'Football', 'icon' => 'football-ball'],
+            'soccer' => ['title' => 'Soccer', 'icon' => 'futbol'],
+            'golf' => ['title' => 'Golf', 'icon' => 'golf-ball'],
+            'hockey' => ['title' => 'Hockey', 'icon' => 'hockey-puck'],
+            'quidditch' => ['title' => 'Quidditch', 'icon' => 'quidditch'],
+            'skating' => ['title' => 'Ice Skating', 'icon' => 'skating'],
+            'skiing' => ['title' => 'Skiing', 'icon' => 'skiing'],
+            'skiing-nordic' => ['title' => 'Nordic Skiing', 'icon' => 'skiing-nordic'],
+            'snowboarding' => ['title' => 'Snowboarding', 'icon' => 'snowboarding'],
+            'table-tennis' => ['title' => 'Ping Pong', 'icon' => 'table-tennis'],
+            'volleyball' => ['title' => 'Volleyball', 'icon' => 'volleyball-ball'],
+        ];
+    }
+
+    public static function getActivityIcon($activity) {
+        $activities = self::getActivities();
+
+        if (isset($activities[$activity])) {
+            return $activities[$activity]['icon'];
+        } else {
+            return 'question';
+        }
+    }
+
+    public static function getActivityTitle($activity) {
+        $activities = self::getActivities();
+
+        if (isset($activities[$activity])) {
+            return $activities[$activity]['title'];
+        } else {
+            return 'Unknown';
+        }
     }
 }

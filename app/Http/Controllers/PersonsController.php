@@ -27,7 +27,9 @@ class PersonsController extends Controller
      */
     public function create()
     {
-        return view('persons.create');
+        $helper = new PersonsHelper();
+        $activities = $helper->getActivities();
+        return view('persons.create')->with('activities', $activities);
     }
 
     /**
@@ -43,7 +45,8 @@ class PersonsController extends Controller
             'last_name' => 'required',
             'email' => 'required|email',
             'dob' => 'required',
-            'eye_color' => 'required'
+            'eye_color' => 'required',
+            'activity' => 'required'
         ]);
 
         // Create person
@@ -53,6 +56,7 @@ class PersonsController extends Controller
         $person->email = $request->input('email');
         $person->dob = $request->input('dob');
         $person->eye_color = $request->input('eye_color');
+        $person->activity = $request->input('activity');
         $person->save();
 
         return redirect('/persons')->with('success', 'Person Created');
@@ -70,6 +74,8 @@ class PersonsController extends Controller
         $helper = new PersonsHelper();
         $person['age'] = $helper->getAge($person->dob);
         $person['sign'] = $helper->getSign($person->dob);
+        $person['activity_icon'] = $helper->getActivityIcon($person->activity);
+        $person['activity_title'] = $helper->getActivityTitle($person->activity);
         return view('persons.show')->with('person', $person);
     }
 
@@ -82,7 +88,9 @@ class PersonsController extends Controller
     public function edit($id)
     {
         $person = Person::find($id);
-        return view('persons.edit')->with('person', $person);
+        $helper = new PersonsHelper();
+        $activities = $helper->getActivities();
+        return view('persons.edit')->with(['person' => $person, 'activities' => $activities]);
     }
 
     /**
@@ -99,7 +107,8 @@ class PersonsController extends Controller
             'last_name' => 'required',
             'email' => 'required|email',
             'dob' => 'required',
-            'eye_color' => 'required'
+            'eye_color' => 'required',
+            'activity' => 'required'
         ]);
 
         // Create person
@@ -109,9 +118,10 @@ class PersonsController extends Controller
         $person->email = $request->input('email');
         $person->dob = $request->input('dob');
         $person->eye_color = $request->input('eye_color');
+        $person->activity = $request->input('activity');
         $person->save();
 
-        return redirect('/persons')->with('success', 'Person Updated');
+        return redirect('/persons/'.$id)->with('success', 'Person Updated');
     }
 
     /**

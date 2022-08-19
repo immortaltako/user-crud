@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->date('dob');
             $table->enum('eye_color', ['brown', 'blue', 'hazel', 'green']);
+            $table->string('activity');
             $table->timestamps();
         });
 
