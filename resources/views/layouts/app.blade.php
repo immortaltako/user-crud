@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        @vite(['resources/sass/app.scss'])
+        <!--link href="{{ asset('css/app.css') }}" rel="stylesheet"-->
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         <title>{{config('app.name', 'JELLO')}}</title>
     </head>
     <body>

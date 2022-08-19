@@ -1,7 +1,11 @@
 @extends('layouts/app')
 
 @section('content')
-    <h1>Edit Person</h1>
+    <h1>Edit {{$person->first_name}} {{$person->last_name}}</h1>
+    <div class="mb-2">
+        <a href="/persons" class="btn btn-link"><i class="fa fa-arrow-left"></i> All People</a>
+        <a href="/persons/{{$person->id}}" class="btn btn-link"><i class="fa fa-arrow-left"></i> {{$person->first_name}} {{$person->last_name}} Details</a>
+    </div>
     {!! Form::open(['action' => ['App\Http\Controllers\PersonsController@update', $person->id], 'method' => 'POST']) !!}
         <div class="form-group">
             {{Form::label('first_name', 'First Name')}}
@@ -17,6 +21,6 @@
         </div>
         {{Form::hidden('_method', 'PUT')}}
         {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
-        <a href="/persons" class="btn btn-info">Cancel</a>
+        <a href="/persons" class="btn btn-primary-outline">Cancel</a>
     {!! Form::close() !!}
 @endsection
