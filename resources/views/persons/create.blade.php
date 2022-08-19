@@ -15,6 +15,19 @@
             {{Form::label('email', 'Email')}}
             {{Form::text('email', '', ['class' => 'form-control', 'placeholder' => 'Email'])}}
         </div>
+        <div class="form-group">
+            {{Form::label('dob', 'Date of Birth')}}
+            {{Form::date('dob', '', ['class' => 'form-control'])}}
+        </div>
+        <div class="form-group">
+            {{Form::label('eye_color', 'Eye Color')}}
+            {{Form::select('eye_color', [
+                'brown' => 'Brown',
+                'blue' => 'Blue',
+                'hazel' => 'Hazel',
+                'green' => 'Green'
+            ], null, ['class' => 'form-control', 'placeholder' => 'Pick a color...'])}}
+        </div>
         {{Form::submit('Add Person', ['class' => 'btn btn-primary'])}}
         <a href="/persons" class="btn btn-info">Cancel</a>
     {!! Form::close() !!}

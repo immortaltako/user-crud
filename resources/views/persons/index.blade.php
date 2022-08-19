@@ -12,6 +12,9 @@
             @foreach($persons as $person)
                 <div class="person-container">
                     <a class="person" href="/persons/{{$person->id}}">
+                        <div class="initials">
+                            {{substr($person->first_name, 0, 1)}}{{substr($person->last_name, 0, 1)}}
+                        </div>
                         <h3>{{$person->first_name}} {{$person->last_name}}</h3>
                         <h5>{{$person->email}}</h5>
                         <small>Created on {{$person->created_at}}</small>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Person;
+use App\Http\Helpers\PersonsHelper;
 use DB;
 
 class PersonsController extends Controller
@@ -40,7 +41,9 @@ class PersonsController extends Controller
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'dob' => 'required',
+            'eye_color' => 'required'
         ]);
 
         // Create person
@@ -48,6 +51,8 @@ class PersonsController extends Controller
         $person->first_name = $request->input('first_name');
         $person->last_name = $request->input('last_name');
         $person->email = $request->input('email');
+        $person->dob = $request->input('dob');
+        $person->eye_color = $request->input('eye_color');
         $person->save();
 
         return redirect('/persons')->with('success', 'Person Created');
@@ -62,6 +67,9 @@ class PersonsController extends Controller
     public function show($id)
     {
         $person = Person::find($id);
+        $helper = new PersonsHelper();
+        $person['age'] = $helper->getAge($person->dob);
+        $person['sign'] = $helper->getSign($person->dob);
         return view('persons.show')->with('person', $person);
     }
 
@@ -89,7 +97,9 @@ class PersonsController extends Controller
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'dob' => 'required',
+            'eye_color' => 'required'
         ]);
 
         // Create person
@@ -97,6 +107,8 @@ class PersonsController extends Controller
         $person->first_name = $request->input('first_name');
         $person->last_name = $request->input('last_name');
         $person->email = $request->input('email');
+        $person->dob = $request->input('dob');
+        $person->eye_color = $request->input('eye_color');
         $person->save();
 
         return redirect('/persons')->with('success', 'Person Updated');

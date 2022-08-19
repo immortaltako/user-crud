@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
+            $table->date('dob');
+            $table->enum('eye_color', ['brown', 'blue', 'hazel', 'green']);
             $table->timestamps();
         });
 
